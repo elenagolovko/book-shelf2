@@ -1,0 +1,45 @@
+<div class="book-info"> 
+    <form [formGroup]="bookForm" (ngSubmit)="addBook(bookForm.value)">
+        <div class="form-group">
+            <label>Title <input class="form-control" name="title"
+                            [formControl]="bookForm.controls['title']"
+                            [ngClass]="{'error':!bookForm.controls['title'].valid}"/></label>
+        </div>
+        <div class="form-group">
+            <label>Author <input class="form-control" name="author"
+                            [formControl]="bookForm.controls['author']"
+                            [ngClass]="{'error':!bookForm.controls['author'].valid}"/></label>
+            <button class="add-author-btn" (click)="addAuthor()">+</button>
+        </div>
+        <div class="form-group">
+            <label>Pages <input type="number" class="form-control" name="pages"
+                            [formControl]="bookForm.controls['pages']"
+                            [ngClass]="{'error':!bookForm.controls['pages'].valid}"/></label>
+        </div>
+        <div class="form-group">
+            <label>Publisher Name <input class="form-control" name="publisherName"
+                                    [formControl]="bookForm.controls['publisherName']"
+                                    [ngClass]="{'error':!bookForm.controls['publisherName'].valid}"/></label>
+        </div>
+        <div class="form-group">
+            <label>Year of publication <input class="form-control" name="yearOfPublication"
+                                        [formControl]="bookForm.controls['yearOfPublication']"
+                                        [ngClass]="{'error':!bookForm.controls['yearOfPublication'].valid}"/></label>
+        </div>
+        <div class="form-group">
+            <label>Release date <input class="form-control" name="releaseDate"
+                                [formControl]="bookForm.controls['releaseDate']"
+                                [ngClass]="{'error':!bookForm.controls['releaseDate'].valid}"/></label>
+        </div>
+        <div class="form-group">
+            <label>ISBN <input class="form-control" name="isbn"
+                        [formControl]="bookForm.controls['ISBN']"
+                        [ngClass]="{'error':!bookForm.controls['ISBN'].valid}"/></label>
+        </div>
+        <div class="form-group">
+            <button class="btn" type="submit" [disabled]="!bookForm.valid">
+            Добавить
+            </button>
+        </div>
+    </form>
+</div>

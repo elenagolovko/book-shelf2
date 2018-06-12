@@ -1,0 +1,34 @@
+.book-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-element {
+    list-style: none;
+}
+
+.close-btn {
+    width: 20px;
+    position: relative;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.close-btn::before,
+.close-btn::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background-color: black;
+}
+
+.close-btn::after {
+    transform: rotate(45deg);
+}
+
+.close-btn::before {
+    transform: rotate(-45deg)
+}
+
