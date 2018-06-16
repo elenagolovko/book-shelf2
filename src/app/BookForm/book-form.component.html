@@ -1,5 +1,5 @@
 <div class="book-info"> 
-    <form [formGroup]="bookForm" (ngSubmit)="addBook(bookForm.value)">
+    <form [formGroup]="bookForm" (ngSubmit)="addBook(bookForm.value, newImage.value)">
         <div class="form-group">
             <label>Title <input class="form-control" name="title"
                             [formControl]="bookForm.controls['title']"
@@ -35,6 +35,12 @@
             <label>ISBN <input class="form-control" name="isbn"
                         [formControl]="bookForm.controls['ISBN']"
                         [ngClass]="{'error':!bookForm.controls['ISBN'].valid}"/></label>
+        </div>
+        <input type="file" id="upload-file" class="img-upload__input visually-hidden" name="filename" (change)="uploadImage($event)">
+        <label for="upload-file">Загрузить изображение</label>
+        <div class="form-group">
+            <img src="" class="hit-me" alt="">
+            <input class="form-control visually-hidden" name="image" #newImage/>
         </div>
         <div class="form-group">
             <button class="btn" type="submit" [disabled]="!bookForm.valid">

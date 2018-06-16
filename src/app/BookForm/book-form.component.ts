@@ -14,6 +14,24 @@ import { BookService } from '../data/book.service';
             .book-info{width: 300px;}
             .add-author-btn{position: relative; left: 265px; background-color: #fff;}
             .error{border: 1px solid red;}
+                          
+            .visually-hidden {
+                position: absolute;
+                
+                width: 1px;
+                height: 1px;
+                margin: -1px;
+                border: 0;
+                padding: 0;
+                
+                white-space: nowrap;
+                
+                -webkit-clip-path: inset(100%);
+                        clip-path: inset(100%);
+                
+                clip: rect(0 0 0 0);
+                overflow: hidden;
+            }
     `
   ]
 })
@@ -35,12 +53,31 @@ export class BookFormComponent {
                         'publisherName' : ["", Validators.maxLength(30)],
                         'yearOfPublication' : [null, Validators.min(1800)],
                         'releaseDate' : "",// не раньше 01.01.1800
-                        'ISBN': ["", Validators.pattern(/\d+-\d+/g)]
+                        'ISBN': ["", Validators.pattern(/\d+-\d+/g)],
+                        'image' : ""
                       })
                 }
 
     
-    addBook(value: Book[]) {
+    addBook(value: Book, image: any) {
+        if (image) {
+            value.image = image
+        }
         this.bookService.addNew(value);
+    }
+
+    uploadImage(event: any){
+        let fileChooser: HTMLInputElement = event.target || event.srcElement;
+        let imageValueInput: HTMLInputElement = document.querySelector('[name="image"]');
+        let file: File = fileChooser.files[0];
+        let reader  = new FileReader();
+
+        reader.onloadend = function () {
+            imageValueInput.value = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } 
     }
   }

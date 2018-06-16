@@ -8,7 +8,7 @@
         "yearOfPublication": 1991,
         "releaseDate": 1964,
         "ISBN": "5-87110-001-5",
-        "image": "assets/img/upload-default-image2.jpg"
+        "image": "./src/assets/upload-default-image2.jpg"
       },
       {
         "title": "Конец Вечности",
@@ -18,7 +18,7 @@
         "yearOfPublication": 2008,
         "releaseDate": 1955,
         "ISBN": "978-5-699-29966-9",
-        "image": "assets/img/upload-default-image1.jpg"
+        "image": "./src/assets/upload-default-image1.jpg"
       }
     ]
   }
