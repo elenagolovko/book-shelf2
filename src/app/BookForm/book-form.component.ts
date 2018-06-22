@@ -7,33 +7,7 @@ import { BookService } from '../data/book.service';
 @Component({
   selector: "book-form",
   templateUrl: "book-form.component.html",
-  styles: [
-    ` 
-            input{float:right;}
-            .form-group{padding-bottom: 20px;}
-            .book-info{width: 300px;}
-            .add-author-btn{position: relative; left: 265px; background-color: #fff;}
-            .error{border: 1px solid red;}
-                          
-            .visually-hidden {
-                position: absolute;
-                
-                width: 1px;
-                height: 1px;
-                margin: -1px;
-                border: 0;
-                padding: 0;
-                
-                white-space: nowrap;
-                
-                -webkit-clip-path: inset(100%);
-                        clip-path: inset(100%);
-                
-                clip: rect(0 0 0 0);
-                overflow: hidden;
-            }
-    `
-  ]
+  styleUrls: ['book-form.component.css']
 })
 export class BookFormComponent {
     bookForm : FormGroup;
@@ -59,25 +33,22 @@ export class BookFormComponent {
                 }
 
     
-    addBook(value: Book, image: any) {
-        if (image) {
-            value.image = image
-        }
+    addBook(value: Book) {
         this.bookService.addNew(value);
     }
 
-    uploadImage(event: any){
-        let fileChooser: HTMLInputElement = event.target || event.srcElement;
-        let imageValueInput: HTMLInputElement = document.querySelector('[name="image"]');
-        let file: File = fileChooser.files[0];
-        let reader  = new FileReader();
+    // uploadImage(event: any){
+    //     let fileChooser: HTMLInputElement = event.target || event.srcElement;
+    //     let imageValueInput: HTMLInputElement = document.querySelector('[name="image"]');
+    //     let file: File = fileChooser.files[0];
+    //     let reader  = new FileReader();
 
-        reader.onloadend = function () {
-            imageValueInput.value = reader.result;
-        }
+    //     reader.onloadend = function () {
+    //         imageValueInput.value = reader.result;
+    //     }
 
-        if (file) {
-            reader.readAsDataURL(file);
-        } 
-    }
+    //     if (file) {
+    //         reader.readAsDataURL(file);
+    //     } 
+    // }
   }

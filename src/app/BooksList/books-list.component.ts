@@ -4,24 +4,7 @@ import { Book } from '../data/book';
 
 @Component({
   selector: 'books-list',
-  template: `
-    <div>
-        <h3>Добавленные книги</h3>
-        <button class="sort-btn" type="button" (click)="nameSort()">Sort by name</button>
-        <button class="sort-btn" type="button" (click)="dateSort()">Sort by release date</button>
-        <ul *ngFor="let book of books; let index = index" class="book-list">
-            <li class="img-upload book-element">
-                <img src="{{book.image}}" width="115" height="150" alt="Обложка книги">
-            </li>
-            <li class="book-element">
-            {{book.title}} <br> 
-            {{book.author}} <br> 
-            {{book.pages}} <br> 
-            </li>
-            <button class="close-btn" type="button" (click)="removeBook(index)"></button>
-        </ul>
-    </div>
-  `,
+  templateUrl: "book-list.component.html",
   styleUrls: ['book-list.component.css']
 })
 

@@ -1,32 +1,32 @@
-<div class="book-info"> 
-    <form [formGroup]="bookForm" (ngSubmit)="addBook(bookForm.value, newImage.value)">
-        <div class="form-group">
+<div class="book-info col"> 
+    <form [formGroup]="bookForm" (ngSubmit)="addBook(bookForm.value)">
+        <div class="form-group-sm">
             <label>Title <input class="form-control" name="title"
                             [formControl]="bookForm.controls['title']"
                             [ngClass]="{'error':!bookForm.controls['title'].valid}"/></label>
         </div>
-        <div class="form-group">
+        <div class="form-group-sm">
             <label>Author <input class="form-control" name="author"
                             [formControl]="bookForm.controls['author']"
                             [ngClass]="{'error':!bookForm.controls['author'].valid}"/></label>
             <button class="add-author-btn" (click)="addAuthor()">+</button>
         </div>
-        <div class="form-group">
+        <div class="form-group-sm">
             <label>Pages <input type="number" class="form-control" name="pages"
                             [formControl]="bookForm.controls['pages']"
                             [ngClass]="{'error':!bookForm.controls['pages'].valid}"/></label>
         </div>
-        <div class="form-group">
+        <div class="form-group-sm">
             <label>Publisher Name <input class="form-control" name="publisherName"
                                     [formControl]="bookForm.controls['publisherName']"
                                     [ngClass]="{'error':!bookForm.controls['publisherName'].valid}"/></label>
         </div>
-        <div class="form-group">
+        <div class="form-group-sm">
             <label>Year of publication <input class="form-control" name="yearOfPublication"
                                         [formControl]="bookForm.controls['yearOfPublication']"
                                         [ngClass]="{'error':!bookForm.controls['yearOfPublication'].valid}"/></label>
         </div>
-        <div class="form-group">
+        <div class="form-group-sm">
             <label>Release date <input class="form-control" name="releaseDate"
                                 [formControl]="bookForm.controls['releaseDate']"
                                 [ngClass]="{'error':!bookForm.controls['releaseDate'].valid}"/></label>
@@ -36,12 +36,18 @@
                         [formControl]="bookForm.controls['ISBN']"
                         [ngClass]="{'error':!bookForm.controls['ISBN'].valid}"/></label>
         </div>
-        <input type="file" id="upload-file" class="img-upload__input visually-hidden" name="filename" (change)="uploadImage($event)">
+        <div class="form-group-sm">
+            <div class="custom-file"> 
+                <input type="file" class="custom-file-input" id="customFile"> 
+                <label class="custom-file-label" for="customFile">Choose file</label> 
+            </div>
+        </div> 
+        <!-- <input type="file" id="upload-file" class="img-upload__input visually-hidden" name="filename" (change)="uploadImage($event)">
         <label for="upload-file">Загрузить изображение</label>
         <div class="form-group">
             <input class="form-control visually-hidden" name="image" #newImage/>
-        </div>
-        <div class="form-group">
+        </div> -->
+        <div class="form-group-sm">
             <button class="btn" type="submit" [disabled]="!bookForm.valid">
             Добавить
             </button>
