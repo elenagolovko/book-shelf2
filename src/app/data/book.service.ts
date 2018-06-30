@@ -9,6 +9,7 @@ export class BookService {
   private logger: Logger;
   private books: Book[] = [];
   private data: Book[] = JSON.parse(localStorage.getItem('books'));
+
   save(){
     localStorage.setItem('books', JSON.stringify(this.data));
   }
@@ -25,17 +26,25 @@ export class BookService {
         throw err;
       })
   }
+
   getData(): Book[] {
     return this.data;
   }
+
   addNew(book: any) {
+    if (book.image === "") {
+      book.image = "src/assets/not-available.jpg";
+    }
+    
     this.data.push(book);
     this.save();
   }
+
   removeData(ind: number) {
     this.data.splice(ind, 1);
     this.save();
   }
+
   sortNames() {
     this.data.sort(function (a, b) {
       if (a.title.toLowerCase() > b.title.toLowerCase()) {
@@ -48,10 +57,15 @@ export class BookService {
     });
     this.save();
   }
-  sortDates(){
-    this.data.sort(function (a, b) {
-      return a.releaseDate - b.releaseDate;
-    });
-    this.save();
+
+  // sortDates() {
+  //   this.data.sort(function (a, b) {
+  //     return a.releaseDate - b.releaseDate;
+  //   });
+  //   this.save();
+  // }
+  
+  showBook(book: Book) {    
+    console.log(book);
   }
 }

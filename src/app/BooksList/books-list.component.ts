@@ -27,7 +27,11 @@ export class BooksListComponent {
         this.bookService.sortNames();
     }
 
-    dateSort(){
-        this.bookService.sortDates();
+    // dateSort() {
+    //     this.bookService.sortDates();
+    // }
+
+    passInfo(book: Book) {
+        this.bookService.showBook(book);
     }
 }

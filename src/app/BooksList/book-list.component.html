@@ -2,18 +2,21 @@
     <h3>Добавленные книги</h3>
     <button class="btn-primary sort-btn" type="button" (click)="nameSort()">Sort by name</button>
     <button class="btn-primary sort-btn" type="button" (click)="dateSort()">Sort by release date</button>
+<br>
+    <small id="helpBlock" class="text-muted">
+        Click the book to see and edit information.
+    </small>
     <div class="row list">
         <ul *ngFor="let book of books; let index = index" class="book-list col">
             <li class="img-upload book-element">
                 <button type="button" class="close" aria-label="Close" (click)="removeBook(index)">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <img class="img-real" src="{{book.image}}" width="170" height="270" alt="Обложка книги">
+                <img class="img-real" src="{{book.image}}" width="170" height="270" alt="Обложка книги" (click)="passInfo(book)">
             </li>
             <li class="book-element">
-            {{book.title}} <br> 
-            {{book.author}} <br> 
-            {{book.pages}} <br> 
+                <p>«{{book.title}}»</p> 
+                <p>{{book.author}}</p> 
             </li>
         </ul>
     </div>

@@ -1,45 +1,99 @@
 <div class="book-info col"> 
+    <h3>Добавить новую книгу</h3>
     <form [formGroup]="bookForm" (ngSubmit)="addBook(bookForm.value)">
         <div class="form-group-sm">
             <label>Title <input class="form-control" name="title"
-                            [formControl]="bookForm.controls['title']"
-                            [ngClass]="{'error':!bookForm.controls['title'].valid}"/></label>
+                [formControl]="bookForm.controls['title']"
+                [ngClass]="{
+                    'error': bookForm.controls['title'].invalid && (bookForm.controls['title'].dirty),
+                    'has-success': bookForm.controls['title'].valid && (bookForm.controls['title'].dirty)
+               }"/></label>            
+            <!-- <small id="titleHelpBlock" class="form-text text-muted">
+                Title must be 3-30 characters long, contain letters and numbers
+            </small> -->
+            <div class="form-control-feedback"
+            *ngIf="bookForm.controls['title'].errors && (bookForm.controls['title'].dirty)">
+                <p *ngIf="bookForm.controls['title'].errors.required">Title is required</p>
+                <p *ngIf="bookForm.controls['title'].errors.minlength">
+                    Title must be at least 3 characters long
+                </p>
+            </div>
         </div>
         <div class="form-group-sm">
             <label>Author <input class="form-control" name="author"
                             [formControl]="bookForm.controls['author']"
-                            [ngClass]="{'error':!bookForm.controls['author'].valid}"/></label>
-            <button class="add-author-btn" (click)="addAuthor()">+</button>
+                            [ngClass]="{
+                                'error': bookForm.controls['author'].invalid && (bookForm.controls['author'].dirty),
+                                'has-success': bookForm.controls['author'].valid && (bookForm.controls['author'].dirty)
+                           }"/></label>
+            <div class="form-control-feedback"
+            *ngIf="bookForm.controls['author'].errors && (bookForm.controls['author'].dirty)">
+                <p *ngIf="bookForm.controls['author'].errors.required">Author is required</p>
+            </div>
+            <!-- <button class="add-author-btn" (click)="addAuthor()">+</button> -->
         </div>
         <div class="form-group-sm">
             <label>Pages <input type="number" class="form-control" name="pages"
                             [formControl]="bookForm.controls['pages']"
-                            [ngClass]="{'error':!bookForm.controls['pages'].valid}"/></label>
+                            [ngClass]="{
+                                'error': bookForm.controls['pages'].invalid && (bookForm.controls['pages'].dirty),
+                                'has-success': bookForm.controls['pages'].valid && (bookForm.controls['pages'].dirty)
+                           }"/></label>
+            <div class="form-control-feedback"
+            *ngIf="bookForm.controls['pages'].errors && (bookForm.controls['pages'].dirty)">
+                <p *ngIf="bookForm.controls['pages'].errors.required">Pages number is required</p>
+                <p *ngIf="bookForm.controls['pages'].errors.min">
+                    Book can not contain nuber of pages less than 0
+                </p>
+                <p *ngIf="bookForm.controls['pages'].errors.max">
+                    Book can not contain nuber of pages more than 10000
+                </p>
+            </div>
         </div>
         <div class="form-group-sm">
             <label>Publisher Name <input class="form-control" name="publisherName"
                                     [formControl]="bookForm.controls['publisherName']"
-                                    [ngClass]="{'error':!bookForm.controls['publisherName'].valid}"/></label>
+                                    [ngClass]="{
+                                        'error': bookForm.controls['publisherName'].invalid && (bookForm.controls['publisherName'].dirty),
+                                        'has-success': bookForm.controls['publisherName'].valid && (bookForm.controls['publisherName'].dirty)
+                                   }"/></label>
+            <div class="form-control-feedback"
+            *ngIf="bookForm.controls['publisherName'].errors && (bookForm.controls['publisherName'].dirty)">
+                <p *ngIf="bookForm.controls['publisherName'].errors.maxlength">Publisher name can not be longer than 30 characters</p>
+            </div>
         </div>
         <div class="form-group-sm">
             <label>Year of publication <input class="form-control" name="yearOfPublication"
                                         [formControl]="bookForm.controls['yearOfPublication']"
-                                        [ngClass]="{'error':!bookForm.controls['yearOfPublication'].valid}"/></label>
+                                        [ngClass]="{
+                                            'error': bookForm.controls['yearOfPublication'].invalid && (bookForm.controls['yearOfPublication'].dirty),
+                                            'has-success': bookForm.controls['yearOfPublication'].valid && (bookForm.controls['yearOfPublication'].dirty)
+                                       }"/></label>
+            <div class="form-control-feedback"
+            *ngIf="bookForm.controls['yearOfPublication'].errors && (bookForm.controls['yearOfPublication'].dirty)">
+                <p *ngIf="bookForm.controls['yearOfPublication'].errors.min">Book can not be published before 1800</p>
+            </div>
         </div>
+        <div class="form-group-sm"> 
+            <label>Release date <my-date-picker [options]="myDatePickerOptions" 
+            (dateChanged)="onDateChanged($event)"></my-date-picker></label>   
+        </div>      
         <div class="form-group-sm">
-            <label>Release date <input class="form-control" name="releaseDate"
-                                [formControl]="bookForm.controls['releaseDate']"
-                                [ngClass]="{'error':!bookForm.controls['releaseDate'].valid}"/></label>
-        </div>
-        <div class="form-group">
             <label>ISBN <input class="form-control" name="isbn"
                         [formControl]="bookForm.controls['ISBN']"
-                        [ngClass]="{'error':!bookForm.controls['ISBN'].valid}"/></label>
+                        [ngClass]="{
+                            'error': bookForm.controls['ISBN'].invalid && (bookForm.controls['ISBN'].dirty),
+                            'has-success': bookForm.controls['ISBN'].valid && (bookForm.controls['ISBN'].dirty)
+                       }"/></label>
+            <div class="form-control-feedback"
+            *ngIf="bookForm.controls['ISBN'].errors && (bookForm.controls['ISBN'].dirty)">
+                <p *ngIf="bookForm.controls['ISBN'].errors.pattern">Valid ISBN should contain numbers and hyphens. Example: 2-266-11156-6</p>
+            </div>
         </div>
         <div class="form-group-sm">
             <div class="custom-file"> 
                 <input type="file" class="custom-file-input" id="customFile"> 
-                <label class="custom-file-label" for="customFile">Choose file</label> 
+                <label class="custom-file-label" for="customFile">Choose an image</label> 
             </div>
         </div> 
         <!-- <input type="file" id="upload-file" class="img-upload__input visually-hidden" name="filename" (change)="uploadImage($event)">
