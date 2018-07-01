@@ -1,16 +1,16 @@
 <div class="book-info col"> 
     <h3>Добавить новую книгу</h3>
+    <small id="formHelpBlock" class="form-text text-muted">
+        <p class="danger">* - this value is required</p>
+    </small>
     <form [formGroup]="bookForm" (ngSubmit)="addBook(bookForm.value)">
         <div class="form-group-sm">
-            <label>Title <input class="form-control" name="title"
+            <label>Title* <input class="form-control" name="title"
                 [formControl]="bookForm.controls['title']"
                 [ngClass]="{
                     'error': bookForm.controls['title'].invalid && (bookForm.controls['title'].dirty),
                     'has-success': bookForm.controls['title'].valid && (bookForm.controls['title'].dirty)
                }"/></label>            
-            <!-- <small id="titleHelpBlock" class="form-text text-muted">
-                Title must be 3-30 characters long, contain letters and numbers
-            </small> -->
             <div class="form-control-feedback"
             *ngIf="bookForm.controls['title'].errors && (bookForm.controls['title'].dirty)">
                 <p *ngIf="bookForm.controls['title'].errors.required">Title is required</p>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="form-group-sm">
-            <label>Author <input class="form-control" name="author"
+            <label>Author* <input class="form-control" name="author"
                             [formControl]="bookForm.controls['author']"
                             [ngClass]="{
                                 'error': bookForm.controls['author'].invalid && (bookForm.controls['author'].dirty),
@@ -33,7 +33,7 @@
             <!-- <button class="add-author-btn" (click)="addAuthor()">+</button> -->
         </div>
         <div class="form-group-sm">
-            <label>Pages <input type="number" class="form-control" name="pages"
+            <label>Pages* <input type="number" class="form-control" name="pages"
                             [formControl]="bookForm.controls['pages']"
                             [ngClass]="{
                                 'error': bookForm.controls['pages'].invalid && (bookForm.controls['pages'].dirty),
@@ -91,18 +91,23 @@
             </div>
         </div>
         <div class="form-group-sm">
-            <div class="custom-file"> 
-                <input type="file" class="custom-file-input" id="customFile"> 
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" (change)="fileChangeEvent($event)" />
                 <label class="custom-file-label" for="customFile">Choose an image</label> 
+                <div class="form-group">
+                    <input class="form-control visually-hidden" name="image" [formControl]="bookForm.controls['image']"/>
+                </div>
             </div>
-        </div> 
-        <!-- <input type="file" id="upload-file" class="img-upload__input visually-hidden" name="filename" (change)="uploadImage($event)">
-        <label for="upload-file">Загрузить изображение</label>
-        <div class="form-group">
-            <input class="form-control visually-hidden" name="image" #newImage/>
-        </div> -->
+            <image-cropper
+                [imageChangedEvent]="imageChangedEvent"
+                [aspectRatio]="4 / 3"
+                [resizeToWidth]="128"
+                (imageCropped)="imageCropped($event)">
+            </image-cropper>            
+            <img [src]="croppedImage" class="img-thumbnail"/>
+        </div>
         <div class="form-group-sm">
-            <button class="btn" type="submit" [disabled]="!bookForm.valid">
+            <button class="btn submit-btn" type="submit" [disabled]="!bookForm.valid">
             Добавить
             </button>
         </div>

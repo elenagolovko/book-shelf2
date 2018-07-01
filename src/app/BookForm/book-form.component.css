@@ -10,11 +10,11 @@ input{
     width: 300px;
 }
 
-.add-author-btn{
+.add-author-btn {
     position: absolute;
-     left: 265px;
-      background-color: #fff;
-    }
+    left: 265px;
+    background-color: #fff;
+}
 
 label {
     display: flow-root;
@@ -38,5 +38,27 @@ label {
 
 .form-group-sm {
     position: relative;
+}
+
+.submit-btn {
+    margin-top: 10px;
+}
+
+.visually-hidden {
+    position: absolute;
+  
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+  
+    white-space: nowrap;
+  
+    -webkit-clip-path: inset(100%);
+            clip-path: inset(100%);
+  
+    clip: rect(0 0 0 0);
+    overflow: hidden;
 }
 

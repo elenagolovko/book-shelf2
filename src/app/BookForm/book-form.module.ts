@@ -4,13 +4,15 @@ import { BookFormComponent} from './book-form.component';
 import { BookService } from '../data/book.service';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MyDatePickerModule } from 'mydatepicker';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
-        MyDatePickerModule
+        MyDatePickerModule,
+        ImageCropperModule
     ],
     declarations: [
       BookFormComponent

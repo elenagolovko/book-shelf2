@@ -46,32 +46,40 @@ export class BookFormComponent {
     })
   }  
 
-  onDateChanged(event: IMyDateModel) {
+  onDateChanged (event: IMyDateModel) {
     if (event.formatted === '') {
       return;
     }
     var target = document.querySelector('.selectiongroup');
-    var dateInput: HTMLInputElement = document.querySelector('.date-picker');
-      this.bookForm.controls['releaseDate'].setValue(event.formatted);
-      target.setAttribute('style', 'box-shadow: 0px 0px 8px green;');
+    target.setAttribute('style', 'box-shadow: 0px 0px 8px green;');
   };
 
-  addBook(value: Book) {
-    this.bookService.addNew(value);
-  };
-
-    // uploadImage(event: any){
-    //     let fileChooser: HTMLInputElement = event.target || event.srcElement;
-    //     let imageValueInput: HTMLInputElement = document.querySelector('[name="image"]');
-    //     let file: File = fileChooser.files[0];
-    //     let reader  = new FileReader();
-
-    //     reader.onloadend = function () {
-    //         imageValueInput.value = reader.result;
-    //     }
-
-    //     if (file) {
-    //         reader.readAsDataURL(file);
-    //     } 
-    // }
+  cleanUpForm () {
+    this.bookForm.reset();
+    var dpInput: HTMLInputElement = document.querySelector('.selection');
+    var dpGroup = document.querySelector('.selectiongroup');
+    dpGroup.setAttribute('style', '');
+    dpInput.value = "";
+    var cropper: any = document.querySelector('.img-thumbnail');
+    cropper.src = "";
   }
+
+  addBook (value: Book) {
+    this.bookService.addNew(value);
+    this.cleanUpForm();
+  };
+
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+
+  fileChangeEvent (event: any): void {
+    this.imageChangedEvent = event;
+  };
+
+  imageCropped (image: string) {
+    this.croppedImage = image;
+    this.bookForm.controls['image'].setValue(image);
+    var cropper: any = document.querySelector('image-cropper');
+    cropper.parentNode.removeChild(cropper);
+  };
+}

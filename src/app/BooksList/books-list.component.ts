@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BookService } from '../data/book.service';
 import { Book } from '../data/book';
 
+
 @Component({
   selector: 'books-list',
   templateUrl: "book-list.component.html",

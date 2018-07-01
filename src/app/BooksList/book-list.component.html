@@ -1,11 +1,7 @@
 <div class="col">
     <h3>Добавленные книги</h3>
-    <button class="btn-primary sort-btn" type="button" (click)="nameSort()">Sort by name</button>
-    <button class="btn-primary sort-btn" type="button" (click)="dateSort()">Sort by release date</button>
+    <button type="button" class="btn btn-primary" (click)="nameSort()">Sort by title</button>
 <br>
-    <small id="helpBlock" class="text-muted">
-        Click the book to see and edit information.
-    </small>
     <div class="row list">
         <ul *ngFor="let book of books; let index = index" class="book-list col">
             <li class="img-upload book-element">
